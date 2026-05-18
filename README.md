@@ -1,5 +1,21 @@
 # Stronghold of the Dwarven Lords
 
+- [Stronghold of the Dwarven Lords](#stronghold-of-the-dwarven-lords)
+  - [Requirements](#requirements)
+  - [Installation](#installation)
+  - [Running the game](#running-the-game)
+  - [Standalone executables](#standalone-executables)
+    - [macOS](#macos)
+    - [Building executables locally](#building-executables-locally)
+  - [Development](#development)
+  - [Controls](#controls)
+    - [Main menu](#main-menu)
+    - [In game](#in-game)
+  - [Project structure](#project-structure)
+  - [Notes](#notes)
+  - [License](#license)
+
+
 A retro-style terminal adventure game written in modern Perl.
 
 Explore the ancient stronghold, search for the hidden treasure, and survive
