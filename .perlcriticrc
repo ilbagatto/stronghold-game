@@ -1,0 +1,12 @@
+severity = 3
+theme = core
+
+[-ControlStructures::ProhibitPostfixControls]
+[-Subroutines::RequireArgUnpacking]
+[-ValuesAndExpressions::ProhibitMagicNumbers]
+[-Modules::RequireVersionVar]
+[-Documentation::RequirePodSections]
+[-ValuesAndExpressions::ProhibitConstantPragma]
+[-Subroutines::RequireFinalReturn]
+[-ValuesAndExpressions::ProhibitVersionStrings]
+[-RegularExpressions::RequireExtendedFormatting]
