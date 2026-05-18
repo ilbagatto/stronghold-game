@@ -11,7 +11,6 @@
   - [Controls](#controls)
     - [Main menu](#main-menu)
     - [In game](#in-game)
-  - [Project structure](#project-structure)
   - [Inspiration](#inspiration)
   - [Future ideas](#future-ideas)
   - [Notes](#notes)
@@ -153,18 +152,6 @@ make help
 - `M` — show map (costs stamina)
 - `Q` — return to main menu
 
-## Project structure
-
-```text
-lib/Stronghold/
-    Game.pm
-    Map.pm
-    MazeGenerator.pm
-    Tile.pm
-
-script/
-    stronghold.pl
-```
 
 ## Inspiration
 
