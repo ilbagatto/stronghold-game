@@ -12,6 +12,8 @@
     - [Main menu](#main-menu)
     - [In game](#in-game)
   - [Project structure](#project-structure)
+  - [Inspiration](#inspiration)
+  - [Future ideas](#future-ideas)
   - [Notes](#notes)
   - [License](#license)
 
@@ -163,6 +165,26 @@ lib/Stronghold/
 script/
     stronghold.pl
 ```
+
+## Inspiration
+
+The original idea was inspired by classic type-in and text adventure games from
+*The Giant Book of Computer Games* by Tim Hartnell.
+
+This project reimagines those ideas in modern Perl with procedural maze
+generation, terminal graphics, stamina mechanics, and standalone builds.
+
+## Future ideas
+
+Possible future extensions include:
+
+- randomly placed stamina recovery items such as healing water, dwarven bread,
+  mushroom soup, or ancient ale
+- localized versions in multiple languages
+- web version
+- Telegram playable version
+- richer dungeon interactions and events
+- score table and permadeath mode
 
 ## Notes
 
