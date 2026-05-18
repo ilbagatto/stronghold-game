@@ -34,7 +34,7 @@ jobs:
         run: cpanm -nq --installdeps --with-develop .
 
       - name: Build executable
-        run: pp -Ilib -o packed/${{ matrix.output }} script/stronghold.pl
+        run: pp -I lib -o packed/${{ matrix.output }} script/stronghold.pl
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
