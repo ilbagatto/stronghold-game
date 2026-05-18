@@ -46,6 +46,52 @@ Or directly:
 perl -Ilib script/stronghold.pl
 ```
 
+## Standalone executables
+
+Prebuilt executables for macOS, Linux, and Windows are available from the
+GitHub Releases page.
+
+The binaries are built automatically with GitHub Actions and PAR::Packer.
+
+### macOS
+
+The macOS build is unsigned. On first launch, Gatekeeper may block execution.
+
+Remove the quarantine attribute:
+
+```bash
+xattr -d com.apple.quarantine ./stronghold-macos-arm64
+```
+
+Make the file executable:
+
+```bash
+chmod +x ./stronghold-macos-arm64
+```
+
+Run the game:
+
+```bash
+./stronghold-macos-arm64
+```
+
+### Building executables locally
+
+Build a standalone executable:
+
+```bash
+make pack
+```
+
+The executable will be placed in:
+
+```text
+packed/
+```
+
+PAR::Packer builds platform-specific binaries. Windows builds should be
+produced on Windows, Linux builds on Linux, and so on.
+
 ## Development
 
 Run code checks:
