@@ -41,7 +41,7 @@ The game features:
 Clone the repository:
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/stronghold-game.git
+git clone https://github.com/ilbagatto/stronghold-game.git
 cd stronghold-game
 ```
 
@@ -171,7 +171,6 @@ Possible future extensions include:
 - web version
 - Telegram playable version
 - richer dungeon interactions and events
-- score table and permadeath mode
 
 ## Notes
 
