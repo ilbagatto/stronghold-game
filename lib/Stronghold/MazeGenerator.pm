@@ -2,6 +2,7 @@ package Stronghold::MazeGenerator;
 
 # Builds a connected maze grid using recursive backtracking.
 use v5.38;
+our $VERSION = "0.01";
 use warnings;
 
 use Stronghold::Tile qw/WALL FLOOR/;

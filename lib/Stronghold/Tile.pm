@@ -2,6 +2,7 @@ package Stronghold::Tile;
 
 # Defines shared tile constants used by maps and maze generation.
 use v5.38;
+our $VERSION = "0.01";
 use warnings;
 
 use Exporter qw/import/;
