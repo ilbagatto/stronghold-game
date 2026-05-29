@@ -165,12 +165,14 @@ The following environment variables are available for debugging:
 | --- | --- |
 | `STRONGHOLD_DEBUG_SHOW_MAP` | Show the maze map during gameplay without spending stamina. |
 | `STRONGHOLD_DEBUG_SHOW_ARTIFACTS` | Show artifact positions on the debug map. |
+| `STRONGHOLD_DEBUG_SHOW_TREASURE` | Show the treasure position on the debug map. |
 
 Example:
 
 ```bash
 STRONGHOLD_DEBUG_SHOW_MAP=1 \
 STRONGHOLD_DEBUG_SHOW_ARTIFACTS=1 \
+STRONGHOLD_DEBUG_SHOW_TREASURE=1 \
 make run
 ```
 
