@@ -4,3 +4,13 @@ Revision history for Perl extension Stronghold-Game
 
     - original version
 
+0.2.0  2026-05-29
+
+  - Added hidden artifacts placed inside the stronghold.
+  - Added stamina restoration when an artifact is found.
+  - Added artifact messages to the game status output.
+  - Added debug rendering for artifact positions.
+  - Added STRONGHOLD_DEBUG_SHOW_ARTIFACTS debug option.
+  - Documented debug options in README.
+  - Improved highlighting of status values in terminal output.
+  
