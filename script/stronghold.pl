@@ -11,8 +11,9 @@ use Term::ANSIColor qw/colored/;
 use Stronghold::Tile qw/WALL FLOOR/;
 use Stronghold::Game;
 
-use constant DEBUG_SHOW_TREASURE => ( $ENV{STRONGHOLD_DEBUG_SHOW_TREASURE} // 0 );
-use constant DEBUG_SHOW_MAP      => ( $ENV{STRONGHOLD_DEBUG_SHOW_MAP}      // 0 );
+use constant DEBUG_SHOW_TREASURE  => ( $ENV{STRONGHOLD_DEBUG_SHOW_TREASURE}  // 0 );
+use constant DEBUG_SHOW_MAP       => ( $ENV{STRONGHOLD_DEBUG_SHOW_MAP}       // 0 );
+use constant DEBUG_SHOW_ARTIFACTS => ( $ENV{STRONGHOLD_DEBUG_SHOW_ARTIFACTS} // 0 );
 
 sub show_status {
     my $message = shift;
@@ -37,14 +38,14 @@ sub wait_for_key {
 
 sub show_main_menu {
     clear_screen();
-    say colored( "================================", "bright_black" );
-    say colored( " Stronghold of the Dwarven Lords", "bold yellow" );
-    say colored( "================================", "bright_black" );
-    say "";
+    say colored( '================================', 'bright_black' );
+    say colored( ' Stronghold of the Dwarven Lords', 'bold yellow' );
+    say colored( '================================', 'bright_black' );
+    say '';
     say colored( "[N]", "bold green" ) . " New game";
     say colored( "[H]", "bold cyan" ) . " Help";
     say colored( "[Q]", "bold red" ) . " Quit";
-    say "";
+    say '';
 }
 
 sub show_help {
@@ -62,22 +63,25 @@ sub show_help {
     say colored( 'Maps may be summoned from the ancient archives,',   'bold white' );
     say colored( 'but each glimpse of the maze costs precious time.', 'bold white' );
     say '';
+    say colored( 'Ancient artifacts may also be hidden in the stronghold.',   'bold white' );
+    say colored( 'If you find one, its power restores part of your stamina.', 'bold white' );
+    say '';
     say colored( 'Press any key to return to the main menu.', 'bold yellow' );
 
     read_command();
 }
 
 sub show_game_menu {
-    say "";
-    say colored( "Game commands", "bold yellow" );
-    say colored( "-------------", "bright_black" );
-    say colored( "[N]",           "bold green" ) . " Move north";
-    say colored( "[S]",           "bold green" ) . " Move south";
-    say colored( "[E]",           "bold green" ) . " Move east";
-    say colored( "[W]",           "bold green" ) . " Move west";
-    say colored( "[M]",           "bold cyan" ) . " Show map";
-    say colored( "[Q]",           "bold red" ) . " Return to main menu";
-    say "";
+    say '';
+    say colored( 'Game commands', 'bold yellow' );
+    say colored( '-------------', 'bright_black' );
+    say colored( '[N]',           'bold green' ) . ' Move north';
+    say colored( '[S]',           'bold green' ) . ' Move south';
+    say colored( '[E]',           'bold green' ) . ' Move east';
+    say colored( '[W]',           'bold green' ) . ' Move west';
+    say colored( '[M]',           'bold cyan' ) . ' Show map';
+    say colored( '[Q]',           'bold red' ) . ' Return to main menu';
+    say '';
 }
 
 sub read_command {
@@ -105,8 +109,11 @@ sub show_map {
             elsif ( DEBUG_SHOW_TREASURE && $game->is_treasure_at( $row, $col ) ) {
                 print colored( '◆◆', 'bold yellow' );
             }
+            elsif ( DEBUG_SHOW_ARTIFACTS && $game->is_artifact_at( $row, $col ) ) {
+                print colored( '**', 'bold yellow' );
+            }
             else {
-                print colored( cell_char( $map->cell_at( $row, $col ) ), "white" );
+                print colored( cell_char( $map->cell_at( $row, $col ) ), 'white' );
             }
         }
         say "";
@@ -117,26 +124,30 @@ sub show_map {
 sub show_beam {
     my $game = shift;
     my ( $v, $h ) = $game->source_beam;
-    say colored( "Source beam signal: ", "bold cyan" )
-        . colored( 'V=',   'white' )
-        . colored( "$v, ", "bold white" )
-        . colored( 'H=',   'white' )
-        . colored( $h,     "bold white" );
+    say colored( 'Source beam signal: ', 'bold cyan' )
+        . colored( 'V=', 'white' )
+        . colored( $v,   'bold white' )
+        . colored( ', ', 'white' )
+        . colored( 'H=', 'white' )
+        . colored( $h,   'bold white' );
 }
 
 sub show_stamina {
     my $game = shift;
 
-    say colored( "Stamina: ", "bold cyan" )
-        . colored( "@{[ $game->remaining_stamina ]}/@{[ $game->stamina ]}", "bold white" );
+    say colored( 'Stamina: ', 'bold cyan' )
+        . colored( $game->remaining_stamina, 'bold white' )
+        . colored( '/',                      'white' )
+        . colored( $game->stamina,           'bold white' );
 }
 
 sub show_game_result {
     my $game = shift;
 
     if ( $game->is_won ) {
-        show_status(
-            "The treasure is yours.\nThe Stronghold yields after @{[ $game->steps ]} moves.");
+        show_status( "The treasure is yours.\nThe Stronghold yields after "
+                . colored( $game->steps, 'bold cyan' )
+                . ' moves.' );
         return;
     }
 
@@ -144,6 +155,17 @@ sub show_game_result {
         show_status("Your strength is spent.\nThe darkness of the Stronghold closes around you.");
         return;
     }
+}
+
+sub artifact_status {
+    my $artifact = shift;
+
+    return
+          'You found an ancient artifact: '
+        . colored( $artifact->{name}, 'bold magenta' ) . ".\n"
+        . 'Its power restores '
+        . colored( $artifact->{points}, 'bold cyan' )
+        . ' stamina.';
 }
 
 sub move_status {
@@ -167,7 +189,9 @@ sub run_game {
 
     clear_screen();
     show_status(
-"Before you descend, the ancient gate reveals the shape of the halls.\nStudy it well. Further visions will cost you strength."
+        join( "\n",
+            'Before you descend, the ancient gate reveals the shape of the halls.',
+            'Study it well. Further visions will cost you strength.' )
     );
     show_map($game);
     wait_for_key('Press any key to enter the stronghold.');
@@ -209,7 +233,7 @@ sub run_game {
 
             show_map($game) if DEBUG_SHOW_MAP;
 
-            if ( !$move ) {
+            unless ( $move->{moved} ) {
                 $status =
                     "Stone bars the way. The mountain itself denies your passage.\nYour next move.";
                 next;
@@ -221,6 +245,8 @@ sub run_game {
             }
 
             $status = move_status( $before_v, $before_h, $after_v, $after_h );
+            $status = artifact_status( $move->{artifact} ) . "\n" . $status
+                if $move->{artifact};
         }
     }
 }

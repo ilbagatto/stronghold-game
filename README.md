@@ -11,6 +11,7 @@
   - [Controls](#controls)
     - [Main menu](#main-menu)
     - [In game](#in-game)
+  - [Debug options](#debug-options)
   - [Inspiration](#inspiration)
   - [Future ideas](#future-ideas)
   - [Notes](#notes)
@@ -27,6 +28,7 @@ The game features:
 - procedurally generated maze
 - source beam distance hints
 - stamina system
+- hidden artifacts that restore stamina
 - colored terminal interface
 - old-school dungeon atmosphere
 
@@ -152,6 +154,25 @@ make help
 - `M` — show map (costs stamina)
 - `Q` — return to main menu
 
+Ancient artifacts may be hidden in the stronghold. When found, they restore
+part of the player's stamina.
+
+## Debug options
+
+The following environment variables are available for debugging:
+
+| Variable | Description |
+| --- | --- |
+| `STRONGHOLD_DEBUG_SHOW_MAP` | Show the maze map during gameplay without spending stamina. |
+| `STRONGHOLD_DEBUG_SHOW_ARTIFACTS` | Show artifact positions on the debug map. |
+
+Example:
+
+```bash
+STRONGHOLD_DEBUG_SHOW_MAP=1 \
+STRONGHOLD_DEBUG_SHOW_ARTIFACTS=1 \
+make run
+```
 
 ## Inspiration
 
@@ -165,8 +186,7 @@ generation, terminal graphics, stamina mechanics, and standalone builds.
 
 Possible future extensions include:
 
-- randomly placed stamina recovery items such as healing water, dwarven bread,
-  mushroom soup, or ancient ale
+- more artifact types and effects
 - localized versions in multiple languages
 - web version
 - Telegram playable version
